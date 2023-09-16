@@ -1,0 +1,47 @@
+package org.archipel.extractors.protocol;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import net.minecraft.network.NetworkState;
+import net.minecraft.network.NetworkSide;
+
+import org.archipel.extractors.Extractor;
+import org.archipel.Main;
+
+import java.util.TreeSet;
+
+public final class ProtocolExtractor implements Extractor {
+    @Override
+    public JsonElement extract() {
+        var protocol = new JsonObject();
+
+        for (var side : NetworkSide.values()) {
+            var states = new JsonObject();
+
+            for (var state : NetworkState.values()) {
+                Main.LOGGER.debug(state + " " + side + ":");
+
+                var map = state.getPacketIdToPacketMap(side);
+                var packets = new JsonArray();
+
+                for (var id : new TreeSet<>(map.keySet())) {
+                    var packet = map.get(id.intValue());
+                    packets.add(PacketAnalyzer.analyze(packet));
+                }
+
+                states.add(state.name().toLowerCase(), packets);
+            }
+
+            protocol.add(side == NetworkSide.CLIENTBOUND ? "s2c" : "c2s", states);
+        }
+
+        return protocol;
+    }
+
+    @Override
+    public String getName() {
+        return "protocol";
+    }
+}

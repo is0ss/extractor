@@ -2,10 +2,7 @@ package org.archipel;
 
 import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ModInitializer;
-
-import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import org.archipel.extractors.Extractor;
-import org.archipel.extractors.protocol.PacketAnalyzer;
 import org.archipel.extractors.protocol.ProtocolExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

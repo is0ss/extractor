@@ -3,12 +3,10 @@ package org.archipel.extractors.protocol;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
-import net.minecraft.network.NetworkState;
 import net.minecraft.network.NetworkSide;
-
-import org.archipel.extractors.Extractor;
+import net.minecraft.network.NetworkState;
 import org.archipel.Main;
+import org.archipel.extractors.Extractor;
 
 import java.util.TreeSet;
 

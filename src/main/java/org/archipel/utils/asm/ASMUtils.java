@@ -5,6 +5,7 @@ import org.objectweb.asm.commons.Method;
 import org.objectweb.asm.tree.*;
 
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,8 +20,7 @@ public final class ASMUtils {
                         } catch (IllegalAccessException e) {
                             throw new RuntimeException(e);
                         }
-                    },
-                    f -> f.getName()
+                    }, Field::getName
             ));
 
     public static InputStream loadClass(Class<?> cl) {

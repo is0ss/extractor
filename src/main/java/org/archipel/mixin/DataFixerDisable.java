@@ -7,6 +7,10 @@ import org.spongepowered.asm.mixin.Overwrite;
 @Mixin(SharedConstants.class)
 public class DataFixerDisable {
 
+    /**
+     * @author iso
+     * @reason Disable data fixer optimization
+     */
     @Overwrite
     public static void enableDataFixerOptimization() {}
 

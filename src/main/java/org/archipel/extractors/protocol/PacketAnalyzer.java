@@ -2,7 +2,6 @@ package org.archipel.extractors.protocol;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.gson.JsonObject;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.Packet;
 import org.apache.commons.lang3.tuple.Pair;
@@ -29,8 +28,6 @@ public final class PacketAnalyzer {
     public static Multimap<String, Pair<String, String>> packetToFieldsMap = ArrayListMultimap.create();
 
     public static String analyze(Class<? extends Packet<?>> packet) {
-        var obj = new JsonObject();
-
         try(var in = ASMUtils.loadClass(packet)) {
             var cr = new ClassReader(in);
             var cn = new ClassNode();
@@ -85,12 +82,12 @@ public final class PacketAnalyzer {
                 var fields = inter.fields(stack);
                 var locals = inter.locals(stack);
 
-                if (fields.size() > 0)
+                if (!fields.isEmpty())
                     field = fields.toArray(new FieldInsnNode[0])[0];
                 if (fields.size() > 1)
                     throw new AnalyzerException(insn, "invalid number of fields");
 
-                if (locals.size() > 0)
+                if (!locals.isEmpty())
                     bufArg = locals.toArray(new LocalVariableNode[0])[0].desc.equals(Type.getDescriptor(PacketByteBuf.class));
                 if (fields.size() > 1)
                     throw new AnalyzerException(insn, "invalid number of locals");

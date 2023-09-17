@@ -16,7 +16,8 @@ public final class CFAnalyser<V extends Value> extends Analyzer<V> {
     }
 
     @Override
-    protected Node<V> newFrame(Frame frame) {
+    protected Frame<V> newFrame(Frame<? extends V> frame)
+    {
         return new Node<>(frame);
     }
 

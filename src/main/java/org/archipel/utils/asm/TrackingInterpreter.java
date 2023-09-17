@@ -1,22 +1,22 @@
 package org.archipel.utils.asm;
 
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.FieldInsnNode;
 import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.analysis.SourceInterpreter;
 import org.objectweb.asm.tree.analysis.SourceValue;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.FieldInsnNode;
-import org.objectweb.asm.Opcodes;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public final class TrackingInterpreter extends SourceInterpreter implements Opcodes {
-    private Map<FieldInsnNode, Set<SourceValue>> fields = new HashMap<>();
-    private Map<Integer, Set<SourceValue>> locals = new HashMap<>();
+    private final Map<FieldInsnNode, Set<SourceValue>> fields = new HashMap<>();
+    private final Map<Integer, Set<SourceValue>> locals = new HashMap<>();
 
-    private MethodNode method;
+    private final MethodNode method;
 
     public TrackingInterpreter(MethodNode method) {
         super(ASM9);

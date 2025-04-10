@@ -1,0 +1,16 @@
+{
+	"schemaVersion": 1,
+	"id": "extractor",
+	"version": "${version}",
+	"name": "Archipel Extractor",
+	"description": "Extracts Minecraft data for use in server implementations",
+	"authors": [
+		"is0ss @ Archipel Project"
+	],
+	"contact": {
+		"homepage": "https://archipel-project.github.io",
+		"sources": "https://github.com/archipel-project/extractor"
+	},
+	"environment": "client",
+	"mixins": ["extractor.mixins.json"]
+}
